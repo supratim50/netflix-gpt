@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Header from './Header'
+import Header from './Header';
+import TextInput from './TextInput';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -21,10 +22,10 @@ const Login = () => {
         <h1 className='text-4xl mb-4'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
         <form className='z-10'>
           {
-            !isSignInForm && <input type="text" placeholder='Full Name' className='p-4 my-4 w-full bg-gray-800 outline-none' />
+            !isSignInForm && <TextInput type="text" placeholder='Full Name' />
           }
-          <input type="text" placeholder='Email Address' className='p-4 my-4 w-full bg-gray-800 outline-none' />
-          <input type="password" placeholder='Password' className='p-4 my-4 w-full bg-gray-800 outline-none' />
+          <TextInput type={"text"} placeholder="Email Address" />
+          <TextInput type={"password"} placeholder="Password" />
           <button className='p-4 my-6 bg-red-700 w-full rounded-lg'>{isSignInForm ? "Sign In" : "Sign Up"}</button> 
         </form>
         {
