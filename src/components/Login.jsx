@@ -1,12 +1,30 @@
 import React, { useState } from 'react'
 import Header from './Header';
 import TextInput from './TextInput';
+import {validateEmail, validatePassword} from "../utils/validate";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState({email: false, pass: false})
 
   const toogleDignInForm = () => {
     setIsSignInForm((prevVal) => !prevVal)
+  }
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    if(!validateEmail(email)) { // if email is not correct then 'validateEmail' will return false
+      setError(error => ({...error, ...{email: true}}))
+    } else {
+      setError(error => ({...error, ...{email: false}}))
+    }
+    if(!validatePassword(password)) { // if email is not correct then 'validateEmail' will return false
+      setError(error => ({...error, ...{pass: true}}))
+    } else {
+      setError(error => ({...error, ...{pass: false}}))
+    }
   }
 
   return (
@@ -22,11 +40,20 @@ const Login = () => {
         <h1 className='text-4xl mb-4'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
         <form className='z-10'>
           {
-            !isSignInForm && <TextInput type="text" placeholder='Full Name' />
+            !isSignInForm && <TextInput type="text" placeholder='Full Name' onChange={setName} value={name}  />
           }
-          <TextInput type={"text"} placeholder="Email Address" />
-          <TextInput type={"password"} placeholder="Password" />
-          <button className='p-4 my-6 bg-red-700 w-full rounded-lg'>{isSignInForm ? "Sign In" : "Sign Up"}</button> 
+          {
+            error.email ? <TextInput type={"text"} placeholder="Email Address" onChange={setEmail} value={email} error="Invalide Email" /> : <TextInput type={"text"} placeholder="Email Address" onChange={setEmail} value={email} />
+          }
+          {
+            error.pass ? <TextInput type={"password"} placeholder="Password" onChange={setPassword} value={password} error="Invalide Password" /> : <TextInput type={"password"} placeholder="Password" onChange={setPassword} value={password} />
+          }
+          <button 
+            className='p-4 my-6 bg-red-700 w-full rounded-lg'
+            onClick={handleButtonClick}
+            >
+              {isSignInForm ? "Sign In" : "Sign Up"}
+            </button> 
         </form>
         {
           isSignInForm ? (

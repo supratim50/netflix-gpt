@@ -3,8 +3,10 @@
 - Create React App with Vite
 - Configure TailwindCSS
 - Header
+- Routing of App
 - Login Form
 - Sign up Form
+- Form Validation
 
 # Features
 
