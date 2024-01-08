@@ -1,7 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './Header';
 import TextInput from './TextInput';
-import {validateEmail, validatePassword} from "../utils/validate";
+import {validation} from "../utils/validate";
+import {createAccount, signIn} from "../utils/auth"
+import {useNavigate} from "react-router-dom"
+// firebase
+import { onAuthStateChanged } from 'firebase/auth'
+import {auth} from "../utils/firebase"
+
+import { useDispatch } from 'react-redux';
+import {addUser, removeUser} from "../store/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -10,21 +18,46 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState({email: false, pass: false})
 
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch()
+
+  // add to store when user signIn and signUp
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      if(user) {
+        const {uid, email, displayName} = user;
+        dispatch(addUser({
+          uid,
+          email,
+          displayName
+        }))
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    })
+  }, [])
+  
   const toogleDignInForm = () => {
     setIsSignInForm((prevVal) => !prevVal)
   }
+
   const handleButtonClick = (e) => {
     e.preventDefault();
-    if(!validateEmail(email)) { // if email is not correct then 'validateEmail' will return false
-      setError(error => ({...error, ...{email: true}}))
+    validation(email, password, setError);
+    if(error.email || error.pass) return;
+    
+    if(!isSignInForm) {
+      createAccount(email, password);
     } else {
-      setError(error => ({...error, ...{email: false}}))
+      signIn(email, password);
     }
-    if(!validatePassword(password)) { // if email is not correct then 'validateEmail' will return false
-      setError(error => ({...error, ...{pass: true}}))
-    } else {
-      setError(error => ({...error, ...{pass: false}}))
-    }
+
+    setName("");
+    setEmail("");
+    setPassword("");
   }
 
   return (

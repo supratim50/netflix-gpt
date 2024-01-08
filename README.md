@@ -7,6 +7,8 @@
 - Login Form
 - Sign up Form
 - Form Validation
+- Implement SignIn SignUp using firebase 
+- Create Redux Store with userSlice
 
 # Features
 
