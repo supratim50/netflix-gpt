@@ -1,17 +1,23 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getAuth} from "firebase/auth"
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {getAuth} from "firebase/auth";
+
+import { 
+  DB_API_KEY, 
+  DB_AUTH_DOMAIN, 
+  DB_PROJECT_ID, 
+  DB_STORAGE_BUCKET, 
+  DB_MESSAGING_SENDER_ID, 
+  DB_APPID
+} from "../config/config";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA0QURkOOWwGjjNHFwNVPugoYBFkdrMfZY",
-  authDomain: "netflixgpt-312d7.firebaseapp.com",
-  projectId: "netflixgpt-312d7",
-  storageBucket: "netflixgpt-312d7.appspot.com",
-  messagingSenderId: "462043856257",
-  appId: "1:462043856257:web:99c27062396e2035097c80"
+  apiKey: DB_API_KEY,
+  authDomain: DB_AUTH_DOMAIN,
+  projectId: DB_PROJECT_ID,
+  storageBucket: DB_STORAGE_BUCKET,
+  messagingSenderId: DB_MESSAGING_SENDER_ID,
+  appId: DB_APPID
 };
 
 // Initialize Firebase

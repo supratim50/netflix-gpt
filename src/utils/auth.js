@@ -1,6 +1,6 @@
 
 // TODO: Need to change to appWrite
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import {auth} from "./firebase";
 
 //* SIGN UP and SIGN IN 
@@ -31,4 +31,18 @@ export const signIn = (email, password) => {
         const errorMessage = error.message;
         console.log(`${errorCode} - ${errorMessage}`);
       });
+}
+
+// signout 
+export const userSignOut = async () => {
+  try{
+    await signOut(auth);
+    return true
+  } catch(error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(`${errorCode} - ${errorMessage}`);
+    return false
+  }
+
 }

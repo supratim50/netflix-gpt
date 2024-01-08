@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom"
 import { onAuthStateChanged } from 'firebase/auth'
 import {auth} from "../utils/firebase"
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {addUser, removeUser} from "../store/userSlice";
 
 const Login = () => {
@@ -20,11 +20,13 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user)
 
   // add to store when user signIn and signUp
   useEffect(() => {
-    onAuthStateChanged(auth, user => {
+    
+    const unsub = onAuthStateChanged(auth, user => {
       if(user) {
         const {uid, email, displayName} = user;
         dispatch(addUser({
@@ -38,6 +40,8 @@ const Login = () => {
         navigate("/");
       }
     })
+
+    return () => unsub();
   }, [])
   
   const toogleDignInForm = () => {
@@ -63,7 +67,7 @@ const Login = () => {
   return (
     <div className='relative w-full h-screen'>
       
-      <Header />
+      <Header user={user} />
       <div className='absolute w-full'>
         <div className='absolute w-full h-screen bg-black opacity-60'></div>
         <img className='w-full object-cover h-screen' src="https://assets.nflxext.com/ffe/siteui/vlv3/c38a2d52-138e-48a3-ab68-36787ece46b3/eeb03fc9-99c6-438e-824d-32917ce55783/IN-en-20240101-popsignuptwoweeks-perspective_alpha_website_large.jpg" alt="background" />

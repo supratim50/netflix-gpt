@@ -7,17 +7,24 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 // redux 
 import {Provider} from "react-redux"
 import appStore from './store/appStore';
+import Layout from './components/Layout';
 
 function App() {
   
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <Login />
-    },
-    {
-      path: "/browse",
-      element: <Browse/>
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Login />
+        },
+        {
+          path: "/browse",
+          element: <Browse/>
+        },
+      ]
     },
     {
       path: "*",

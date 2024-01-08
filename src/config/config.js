@@ -1,0 +1,11 @@
+// API 
+const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+// DB 
+const DB_API_KEY= import.meta.env.VITE_DB_API_KEY;
+const DB_AUTH_DOMAIN= import.meta.env.VITE_DB_AUTH_DOMAIN;
+const DB_PROJECT_ID= import.meta.env.VITE_DB_PROJECT_ID;
+const DB_STORAGE_BUCKET= import.meta.env.VITE_DB_STORAGE_BUCKET;
+const DB_MESSAGING_SENDER_ID= import.meta.env.VITE_DB_MESSAGING_SENDER_ID;
+const DB_APPID= import.meta.env.VITE_DB_APPID
+
+export {TMDB_API_KEY, DB_API_KEY, DB_AUTH_DOMAIN, DB_PROJECT_ID, DB_STORAGE_BUCKET, DB_MESSAGING_SENDER_ID, DB_APPID}
