@@ -13,7 +13,7 @@ const MianContainer = () => {
   const {original_title, overview, id} = movies[randomNumber];
 
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-screen'>
       <VideoTitle title={original_title} overview={overview} />
       <VIdeoBackground movieId={id} />
     </div>

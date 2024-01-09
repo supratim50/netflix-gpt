@@ -15,7 +15,8 @@ const VIdeoBackground = ({movieId}) => {
   return (
     <div className='w-screen max-h-screen aspect-video overflow-hidden'>
         <iframe 
-        className='w-full h-full'
+        width="100%"
+        height="100%"
         src={`https://www.youtube.com/embed/${movieTrailer.key}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0`} 
         title="YouTube video player" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"  />
