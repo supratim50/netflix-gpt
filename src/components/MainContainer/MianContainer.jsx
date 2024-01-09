@@ -9,10 +9,11 @@ const MianContainer = () => {
 
   if(!movies) return
 
-  const {original_title, overview, id} = movies[0];
+  const randomNumber = Math.floor(Math.random() * 20);
+  const {original_title, overview, id} = movies[randomNumber];
 
   return (
-    <div className='h-screen'>
+    <div className='w-screen h-screen'>
       <VideoTitle title={original_title} overview={overview} />
       <VIdeoBackground movieId={id} />
     </div>
