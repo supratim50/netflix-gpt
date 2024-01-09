@@ -1,9 +1,9 @@
 import React from 'react'
 
-const PrimaryButton = ({children, handleClick}) => {
+const PrimaryButton = ({children, handleClick, className = ""}) => {
   return (
     <button 
-        className='px-8 py-4 bg-red-700 text-white text-xl rounded-lg'
+        className={`px-8 py-3 text-xl rounded-lg ${className}`}
         onClick={handleClick}    
     >
         <span>{children}</span>

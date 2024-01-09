@@ -1,5 +1,5 @@
 import React from 'react'
-import PrimaryButton from './PrimaryButton'
+import PrimaryButton from './Buttons/PrimaryButton'
 import { userSignOut } from '../utils/auth'
 import { useNavigate } from 'react-router-dom'
 
@@ -21,7 +21,7 @@ const Header = ({user}) => {
         alt="logo" 
       />
       {
-        user && <PrimaryButton handleClick={handleClick}>Logout</PrimaryButton>
+        user && <PrimaryButton handleClick={handleClick} className='bg-red-700 text-white'>Logout</PrimaryButton>
       }
     </div>
   )
